@@ -2055,8 +2055,14 @@ bool CBlock::AcceptBlock()
     else if (!IsProtocolV2(nHeight) && nVersion > 6)
         return DoS(100, error("AcceptBlock() : reject too new nVersion = %d", nVersion));
 
-    if (IsProofOfWork() && nHeight > Params().LastPOWBlock())
-        return DoS(100, error("AcceptBlock() : reject proof-of-work at height %d", nHeight));
+    if (IsProofOfWork() && nHeight > Params().LastPOWBlock() && nHeight < Params().PoWmining_Enable()){
+        return DoS(100, error("AcceptBlock() : reject proof-of-work after LastPOWBlock: height %d", nHeight));
+    }
+
+    if (IsProofOfWork() && nHeight > Params().LastPOWBlock2()){
+        return DoS(100, error("AcceptBlock() : reject proof-of-work after LastPOWBlock2: height v2 %d", nHeight));
+    }
+
 
     // Check coinbase timestamp
     if (GetBlockTime() > FutureDrift((int64_t)vtx[0].nTime, nHeight))
