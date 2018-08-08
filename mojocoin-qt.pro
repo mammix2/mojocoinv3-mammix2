@@ -2,7 +2,7 @@ TEMPLATE = app
 DEFINES += fName1 fName2
 fName1 = "mojocoin"
 macx:TARGET = "mojocoin-qt"
-VERSION = 3.0.1.0
+VERSION = 3.1.0.0
 QMAKE_TARGET_BUNDLE_PREFIX = co.mojocoin
 contains(QT_ARCH, i386) {
     fName2 = "-qt-x86-v"
