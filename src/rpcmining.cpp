@@ -249,7 +249,7 @@ Value getworkex(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(-10, "Mojocoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().HardFork_Block() )
+    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().PoWmining_Enable() )
         throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks after LastPOWBlock ");
 
     if (pindexBest->nHeight >= Params().LastPOWBlock2())
@@ -386,7 +386,7 @@ Value getwork(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Mojocoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().HardFork_Block() )
+    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().PoWmining_Enable() )
         throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks after LastPOWBlock ");
 
     if (pindexBest->nHeight >= Params().LastPOWBlock2())
@@ -533,7 +533,7 @@ Value getblocktemplate(const Array& params, bool fHelp)
     if (IsInitialBlockDownload())
         throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "Mojocoin is downloading blocks...");
 
-    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().HardFork_Block() )
+    if (pindexBest->nHeight >= Params().LastPOWBlock() && pindexBest->nHeight < Params().PoWmining_Enable() )
         throw JSONRPCError(RPC_MISC_ERROR, "No more PoW blocks after LastPOWBlock ");
 
     if (pindexBest->nHeight >= Params().LastPOWBlock2())
