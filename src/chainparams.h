@@ -69,7 +69,7 @@ public:
     int RPCPort() const { return nRPCPort; }
     int LastPOWBlock() const { return nLastPOWBlock; }
     int LastPOWBlock2() const { return nLastPOWBlock2; }
-    int HardFork_Block() const { return nHardFork_Block; }
+    int PoWmining_Enable() const { return nPoWmining_Enable; }
 protected:
     CChainParams() {};
 
@@ -86,7 +86,7 @@ protected:
     std::vector<unsigned char> base58Prefixes[MAX_BASE58_TYPES];
     int nLastPOWBlock;
     int nLastPOWBlock2;
-    int nHardFork_Block;
+    int nPoWmining_Enable;
 };
 
 /**
