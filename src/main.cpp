@@ -2933,7 +2933,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         if (pindexBest->nHeight > Params().PoWmining_Enable()){
                 if (pfrom->nVersion < LEGACY_CUTOFF_MIN_PROTOCOL_VERSION) {
 
-                LogPrintf("Diconnect legacy version wallet after v3.1 fork");
+                LogPrintf("Diconnect legacy version after v3.1 fork: partner %s using obsolete version %i; disconnecting\n", pfrom->addr.ToString(), pfrom->nVersion);
                 pfrom->fDisconnect = true;
             }
 		}
