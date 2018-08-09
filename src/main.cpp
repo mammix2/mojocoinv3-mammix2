@@ -2933,10 +2933,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         if (pindexBest->nHeight > Params().HardFork_Block()){
                 if (pfrom->nVersion < LEGACY_CUTOFF_MIN_PROTOCOL_VERSION) {
 
-                string remoteAddr;
-                remoteAddr = ", peeraddr=" + pfrom->addr.ToString();
-
-                LogPrintf("Diconnect old protocol version wallet: partner %s: version %d, blocks=%d, us=%s, peer=%d%s\n", pfrom->nStartingHeight, addrMe.ToString(), pfrom->id, remoteAddr);
+                LogPrintf("Diconnect legacy version wallet after v3.1 fork");
                 pfrom->fDisconnect = true;
             }
 		}
