@@ -2055,7 +2055,7 @@ bool CBlock::AcceptBlock()
     else if (!IsProtocolV2(nHeight) && nVersion > 6)
         return DoS(100, error("AcceptBlock() : reject too new nVersion = %d", nVersion));
 
-    if (IsProofOfWork() && nHeight > Params().LastPOWBlock() && nHeight < Params().PoWmining_Enable()){
+    if (IsProofOfWork() && nHeight > Params().LastPOWBlock() && nHeight < Params().HardFork_Block()){
         return DoS(100, error("AcceptBlock() : reject proof-of-work after LastPOWBlock: height %d", nHeight));
     }
 
@@ -2903,6 +2903,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
         CAddress addrFrom;
         uint64_t nNonce = 1;
         vRecv >> pfrom->nVersion >> pfrom->nServices >> nTime >> addrMe;
+
         if (pfrom->nVersion < MIN_PEER_PROTO_VERSION)
         {
             // disconnect from peers older than this proto version
@@ -2927,6 +2928,21 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
             pfrom->fDisconnect = true;
             return true;
         }
+
+        // enforce minimum protocol version on network.
+        if (pindexBest->nHeight > Params().HardFork_Block()){
+                if (pfrom->nVersion < LEGACY_CUTOFF_MIN_PROTOCOL_VERSION) {
+
+                string remoteAddr;
+                remoteAddr = ", peeraddr=" + pfrom->addr.ToString();
+
+                LogPrintf("Diconnect old protocol version wallet: partner %s: version %d, blocks=%d, us=%s, peer=%d%s\n",
+                    pfrom->cleanSubVer, pfrom->nVersion,
+                pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
+                remoteAddr);
+                pfrom->fDisconnect = true;
+            }
+		}
 
         pfrom->addrLocal = addrMe;
         if (pfrom->fInbound && addrMe.IsRoutable())
