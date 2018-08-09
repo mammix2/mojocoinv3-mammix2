@@ -2936,10 +2936,7 @@ bool static ProcessMessage(CNode* pfrom, string strCommand, CDataStream& vRecv, 
                 string remoteAddr;
                 remoteAddr = ", peeraddr=" + pfrom->addr.ToString();
 
-                LogPrintf("Diconnect old protocol version wallet: partner %s: version %d, blocks=%d, us=%s, peer=%d%s\n",
-                    pfrom->cleanSubVer, pfrom->nVersion,
-                pfrom->nStartingHeight, addrMe.ToString(), pfrom->id,
-                remoteAddr);
+                LogPrintf("Diconnect old protocol version wallet: partner %s: version %d, blocks=%d, us=%s, peer=%d%s\n", pfrom->nStartingHeight, addrMe.ToString(), pfrom->id, remoteAddr);
                 pfrom->fDisconnect = true;
             }
 		}
