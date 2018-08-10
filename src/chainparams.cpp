@@ -126,8 +126,8 @@ public:
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
         nLastPOWBlock = 10000;
-        nPoWmining_Enable = 125000; // mojo v3.1 fork. Re-start PoW mining after this block for 0 Coin reward. This will ensure chain keeps moving after fork
-        nLastPOWBlock2 = 130000; // mojo v3.1 fork. Disable temp PoW mining phase
+        nPoWmining_Enable = 122500; // mojo v3.1 fork. Re-start PoW mining after this block for 0 Coin reward. This will ensure chain keeps moving after fork
+        nLastPOWBlock2 = 132500; // mojo v3.1 fork. Disable temp PoW mining phase
     }
 
     virtual const CBlock& GenesisBlock() const { return genesis; }
